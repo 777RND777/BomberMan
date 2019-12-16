@@ -3,7 +3,7 @@ import pygame
 
 
 pygame.init()
-screen = pygame.display.set_mode((1050, 700))
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("BomberMan")
 delay = 8
 GAME = True
@@ -60,19 +60,32 @@ wall1 = Wall(0, 0)
 edge = Edge(0, 0)
 
 
-while game:
+def edges():
+    for i in range(10):
+        screen.blit(edge.image, (0, i * SIZE))
+    for i in range(10):
+        screen.blit(edge.image, (WIDTH - SIZE, i * SIZE))
+    for i in range(15):
+        screen.blit(edge.image, (i * SIZE, 0))
+    for i in range(15):
+        screen.blit(edge.image, (i * SIZE, HEIGHT - SIZE))
+    for i in range(1, 7):
+        for j in range(1, 5):
+            screen.blit(edge.image, (2 * i * SIZE, 2 * j * SIZE))
+
+
+while GAME:
     keys = pygame.key.get_pressed()
     mc.movement()
     if keys[pygame.K_ESCAPE]:
-        game = False
+        GAME = False
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            game = False
+            GAME = False
 
-    screen.blit(edge.image, (100, 100))
-    screen.blit(edge.image, (200, 100))
     screen.fill(BG_COLOR)
+    edges()
     screen.blit(mc.image, mc.rect)
     if bomb_placed:
         screen.blit(bomb.image, bomb.rect)
