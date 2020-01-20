@@ -1,13 +1,16 @@
 from consts import *
+from threading import Timer
 import pygame
 
 
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("BomberMan")
-delay = 8
 GAME = True
-bomb_placed = False
+
+bomb_group = pygame.sprite.Group()
+wall_group = pygame.sprite.Group()
+edge_group = pygame.sprite.Group()
 
 
 class MainCharacter(pygame.sprite.Sprite):
@@ -34,29 +37,33 @@ class MainCharacter(pygame.sprite.Sprite):
 
 class Bomb(pygame.sprite.Sprite):
     def __init__(self, x, y):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.transform.scale(pygame.image.load("img/bomb1.png").convert_alpha(), XY)
+        pygame.sprite.Sprite.__init__(self, bomb_group)
+        self.image = pygame.transform.scale(pygame.image.load("img/bomb1.png").convert_alpha(), HERO_XY)
         self.rect = self.image.get_rect(center=(x, y))
         self.placed = False
+
+    def explode(self):
+        self.image = pygame.transform.scale(pygame.image.load("img/blow.png").convert_alpha(), HERO_XY)
 
 
 class Wall(pygame.sprite.Sprite):
     def __init__(self, x, y):
-        pygame.sprite.Sprite.__init__(self)
+        pygame.sprite.Sprite.__init__(self, wall_group)
         self.image = pygame.transform.scale(pygame.image.load("img/wall.jpg").convert_alpha(), XY)
         self.rect = self.image.get_rect(center=(x, y))
+        self.destroyed = False
 
 
 class Edge(pygame.sprite.Sprite):
     def __init__(self, x, y):
-        pygame.sprite.Sprite.__init__(self)
+        pygame.sprite.Sprite.__init__(self, edge_group)
         self.image = pygame.transform.scale(pygame.image.load("img/edge.png").convert_alpha(), XY)
         self.rect = self.image.get_rect(center=(x, y))
 
 
-mc = MainCharacter(0, 0)
+mc = MainCharacter(105, 105)
 bomb = Bomb(0, 0)
-wall1 = Wall(0, 0)
+wall = Wall(0, 0)
 edge = Edge(0, 0)
 
 
@@ -74,9 +81,17 @@ def edges():
             screen.blit(edge.image, (2 * i * SIZE, 2 * j * SIZE))
 
 
+def walls():
+    screen.blit(wall.image, (70, 210))
+    screen.blit(wall.image, (210, 140))
+    screen.blit(wall.image, (280, 70))
+
+
 while GAME:
     keys = pygame.key.get_pressed()
     mc.movement()
+    if pygame.sprite.spritecollideany(mc, edge_group):
+        GAME = False
     if keys[pygame.K_ESCAPE]:
         GAME = False
 
@@ -86,12 +101,12 @@ while GAME:
 
     screen.fill(BG_COLOR)
     edges()
+    walls()
     screen.blit(mc.image, mc.rect)
-    if bomb_placed:
+    if bomb.placed:
         screen.blit(bomb.image, bomb.rect)
-    screen.blit(wall1.image, wall1.rect)
     pygame.display.update()
-    pygame.time.delay(delay)
+    pygame.time.delay(DELAY)
 
     mc.update()
-    wall1.update()
+    wall.update()
