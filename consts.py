@@ -12,12 +12,6 @@ XY = (SIZE, SIZE)
 BG_COLOR = (0, 149, 0)
 DELAY = 5
 
-# pygame
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-bomb_group = pygame.sprite.Group()
-wall_group = pygame.sprite.Group()
-edge_group = pygame.sprite.Group()
-
 
 # classes
 class MainCharacter(pygame.sprite.Sprite):
@@ -26,7 +20,7 @@ class MainCharacter(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(pygame.image.load("img/mc.png").convert_alpha(), HERO_XY)
         self.rect = self.image.get_rect(center=(x, y))
 
-    def movement(self, keys):
+    def control(self, keys):
         if keys[pygame.K_RIGHT]:
             self.rect.x += 2
             if pygame.sprite.spritecollideany(self, edge_group):
@@ -43,6 +37,10 @@ class MainCharacter(pygame.sprite.Sprite):
             self.rect.y += 2
             if pygame.sprite.spritecollideany(self, edge_group):
                 self.rect.y -= 2
+        if keys[pygame.K_SPACE]:
+            if not bomb.placed:
+                bomb.placed = True
+                bomb.rect = (self.rect.x, self.rect.y)
 
 
 class Bomb(pygame.sprite.Sprite):
@@ -51,6 +49,7 @@ class Bomb(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(pygame.image.load("img/bomb1.png").convert_alpha(), HERO_XY)
         self.rect = self.image.get_rect(center=(x, y))
         self.placed = False
+        self.timer = 0
 
     def explode(self):
         self.image = pygame.transform.scale(pygame.image.load("img/blow.png").convert_alpha(), HERO_XY)
@@ -69,3 +68,12 @@ class Edge(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self, edge_group)
         self.image = pygame.transform.scale(pygame.image.load("img/edge.png").convert_alpha(), XY)
         self.rect = self.image.get_rect(center=(x, y))
+
+# pygame
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+bomb_group = pygame.sprite.Group()
+wall_group = pygame.sprite.Group()
+edge_group = pygame.sprite.Group()
+
+mc = MainCharacter(105, 105)
+bomb = Bomb(0, 0)
