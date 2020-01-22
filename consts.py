@@ -23,19 +23,19 @@ class MainCharacter(pygame.sprite.Sprite):
     def control(self, keys):
         if keys[pygame.K_RIGHT]:
             self.rect.x += 2
-            if pygame.sprite.spritecollideany(self, edge_group):
+            if pygame.sprite.spritecollideany(self, edge_group) or pygame.sprite.spritecollideany(self, wall_group):
                 self.rect.x -= 2
         if keys[pygame.K_LEFT]:
             self.rect.x -= 2
-            if pygame.sprite.spritecollideany(self, edge_group):
+            if pygame.sprite.spritecollideany(self, edge_group) or pygame.sprite.spritecollideany(self, wall_group):
                 self.rect.x += 2
         if keys[pygame.K_UP]:
             self.rect.y -= 2
-            if pygame.sprite.spritecollideany(self, edge_group):
+            if pygame.sprite.spritecollideany(self, edge_group) or pygame.sprite.spritecollideany(self, wall_group):
                 self.rect.y += 2
         if keys[pygame.K_DOWN]:
             self.rect.y += 2
-            if pygame.sprite.spritecollideany(self, edge_group):
+            if pygame.sprite.spritecollideany(self, edge_group) or pygame.sprite.spritecollideany(self, wall_group):
                 self.rect.y -= 2
         if keys[pygame.K_SPACE]:
             if not bomb.placed:

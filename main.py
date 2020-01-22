@@ -1,10 +1,11 @@
 from consts import *
-from levels.level_1 import create_edges, draw_level
+import levels.level_1 as l1
 
 
 pygame.init()
 pygame.display.set_caption("BomberMan")
-level_edges = create_edges()
+level_edges = l1.create_edges()
+level_walls = l1.create_walls()
 GAME = True
 
 while GAME:
@@ -18,7 +19,7 @@ while GAME:
             GAME = False
 
     screen.fill(BG_COLOR)
-    draw_level(level_edges)
+    l1.draw_level(level_edges, level_walls)
     screen.blit(mc.image, mc.rect)
     if bomb.placed:
         screen.blit(bomb.image, bomb.rect)

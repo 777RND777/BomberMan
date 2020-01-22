@@ -1,8 +1,9 @@
 from consts import *
 
 
-def draw_level(level):
-    draw_edges(level)
+def draw_level(level_edges, level_walls):
+    draw_edges(level_edges)
+    draw_walls(level_walls)
 
 
 def create_edges():
@@ -29,3 +30,17 @@ def draw_edges(level):
     for i in range(1, 7):
         for j in range(1, 5):
             screen.blit(level[i].image, (2 * i * SIZE, 2 * j * SIZE))
+
+
+def create_walls():
+    return [
+        Wall(245, 175),
+        Wall(175, 245),
+        Wall(105, 175)
+    ]
+
+
+def draw_walls(level):
+    screen.blit(level[0].image, (210, 140))
+    screen.blit(level[0].image, (140, 210))
+    screen.blit(level[0].image, (70, 140))
