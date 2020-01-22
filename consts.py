@@ -46,13 +46,21 @@ class MainCharacter(pygame.sprite.Sprite):
 class Bomb(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self, bomb_group)
-        self.image = pygame.transform.scale(pygame.image.load("img/bomb1.png").convert_alpha(), HERO_XY)
+        self.image = pygame.transform.scale(pygame.image.load("img/bomb.png").convert_alpha(), HERO_XY)
         self.rect = self.image.get_rect(center=(x, y))
         self.placed = False
+        self.explosion = False
         self.timer = 0
 
     def explode(self):
         self.image = pygame.transform.scale(pygame.image.load("img/blow.png").convert_alpha(), HERO_XY)
+        self.explosion = True
+
+    def hide(self):
+        self.placed = False
+        self.explosion = False
+        self.timer = 0
+        self.image = pygame.transform.scale(pygame.image.load("img/bomb.png").convert_alpha(), HERO_XY)
 
 
 class Wall(pygame.sprite.Sprite):
@@ -68,6 +76,7 @@ class Edge(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self, edge_group)
         self.image = pygame.transform.scale(pygame.image.load("img/edge.png").convert_alpha(), XY)
         self.rect = self.image.get_rect(center=(x, y))
+
 
 # pygame
 screen = pygame.display.set_mode((WIDTH, HEIGHT))

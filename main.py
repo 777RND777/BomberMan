@@ -24,8 +24,9 @@ while GAME:
         screen.blit(bomb.image, bomb.rect)
         bomb.timer += 1
         if bomb.timer == 300:
-            bomb.placed = False
-            bomb.timer = 0
+            bomb.explode()
+        if bomb.timer == 400:
+            bomb.hide()
 
     pygame.display.update()
     pygame.time.delay(DELAY)
