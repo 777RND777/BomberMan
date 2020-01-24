@@ -24,9 +24,12 @@ while GAME:
     if bomb.placed:
         screen.blit(bomb.image, bomb.rect)
         bomb.timer += 1
-        if bomb.timer == 300:
+        if bomb.timer == 100:
             bomb.explode()
-        if bomb.timer == 400:
+        if bomb.timer > 100:
+            screen.blit(vertical_boom.image, vertical_boom.rect)
+            screen.blit(horizontal_boom.image, horizontal_boom.rect)
+        if bomb.timer == 200:
             bomb.hide()
 
     pygame.display.update()
