@@ -41,6 +41,9 @@ def create_walls():
 
 
 def draw_walls(level):
-    screen.blit(level[0].image, (210, 140))
-    screen.blit(level[0].image, (140, 210))
-    screen.blit(level[0].image, (70, 140))
+    wall_group.empty()
+    for wall in level:
+        wall.is_destroyed()
+        if not wall.destroyed:
+            wall_group.add(wall)
+            screen.blit(wall.image, (wall.rect.x, wall.rect.y))
