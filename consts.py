@@ -124,7 +124,7 @@ boom_group = pygame.sprite.Group()
 wall_group = pygame.sprite.Group()
 edge_group = pygame.sprite.Group()
 
-mc = MainCharacter(385, 385)
+mc = MainCharacter(105, 105)
 bomb = Bomb(0, 0)
 vertical_boom = VerticalExplosion(0, 0)
 horizontal_boom = HorizontalExplosion(0, 0)

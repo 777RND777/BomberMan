@@ -21,7 +21,7 @@ while GAME:
     screen.fill(BG_COLOR)
     l1.draw_level(level_edges, level_walls)
     screen.blit(mc.image, mc.rect)
-    if bomb.placed:
+    if bomb.is_placed:
         screen.blit(bomb.image, bomb.rect)
         bomb.timer += 1
         if bomb.timer == 100:
