@@ -34,9 +34,46 @@ def draw_edges(level):
 
 def create_walls():
     return [
-        Wall(245, 175),
-        Wall(175, 245),
-        Wall(105, 175)
+        Wall(7 * SIZE / 2, 3 * SIZE / 2),
+        Wall(11 * SIZE / 2, 3 * SIZE / 2),
+
+        Wall(19 * SIZE / 2, 5 * SIZE / 2),
+        Wall(23 * SIZE / 2, 5 * SIZE / 2),
+        Wall(27 * SIZE / 2, 5 * SIZE / 2),
+
+        Wall(7 * SIZE / 2, 7 * SIZE / 2),
+        Wall(9 * SIZE / 2, 7 * SIZE / 2),
+        Wall(19 * SIZE / 2, 7 * SIZE / 2),
+        Wall(25 * SIZE / 2, 7 * SIZE / 2),
+
+        Wall(11 * SIZE / 2, 9 * SIZE / 2),
+
+        Wall(5 * SIZE / 2, 11 * SIZE / 2),
+        Wall(7 * SIZE / 2, 11 * SIZE / 2),
+        Wall(13 * SIZE / 2, 11 * SIZE / 2),
+        Wall(15 * SIZE / 2, 11 * SIZE / 2),
+        Wall(21 * SIZE / 2, 11 * SIZE / 2),
+        Wall(27 * SIZE / 2, 11 * SIZE / 2),
+
+        Wall(7 * SIZE / 2, 13 * SIZE / 2),
+        Wall(15 * SIZE / 2, 13 * SIZE / 2),
+        Wall(19 * SIZE / 2, 13 * SIZE / 2),
+        Wall(23 * SIZE / 2, 13 * SIZE / 2),
+        Wall(27 * SIZE / 2, 13 * SIZE / 2),
+
+        Wall(3 * SIZE / 2, 15 * SIZE / 2),
+        Wall(5 * SIZE / 2, 15 * SIZE / 2),
+        Wall(9 * SIZE / 2, 15 * SIZE / 2),
+        Wall(17 * SIZE / 2, 15 * SIZE / 2),
+
+        Wall(11 * SIZE / 2, 17 * SIZE / 2),
+        Wall(23 * SIZE / 2, 17 * SIZE / 2),
+
+        Wall(9 * SIZE / 2, 19 * SIZE / 2),
+        Wall(11 * SIZE / 2, 19 * SIZE / 2),
+        Wall(13 * SIZE / 2, 19 * SIZE / 2),
+        Wall(15 * SIZE / 2, 19 * SIZE / 2),
+        Wall(25 * SIZE / 2, 19 * SIZE / 2),
     ]
 
 
