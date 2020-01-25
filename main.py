@@ -25,11 +25,13 @@ while GAME:
         screen.blit(bomb.image, bomb.rect)
         bomb.timer += 1
         if bomb.timer == 100:
+            bomb.almost_explode()
+        if bomb.timer == 200:
             bomb.explode()
-        if bomb.timer > 100:
+        if bomb.timer > 200:
             screen.blit(vertical_boom.image, vertical_boom.rect)
             screen.blit(horizontal_boom.image, horizontal_boom.rect)
-        if bomb.timer == 200:
+        if bomb.timer == 300:
             bomb.hide()
 
     pygame.display.update()

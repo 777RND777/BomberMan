@@ -53,6 +53,9 @@ class Bomb(pygame.sprite.Sprite):
         self.timer = 0
         self.size = 1
 
+    def almost_explode(self):
+        self.image = pygame.transform.scale(pygame.image.load("img/red_bomb.png").convert_alpha(), HERO_XY)
+
     def explode(self):
         horizontal_boom.rect.x = self.rect.x - self.size * SIZE - 10
         horizontal_boom.rect.y = self.rect.y
@@ -62,6 +65,7 @@ class Bomb(pygame.sprite.Sprite):
     def hide(self):
         self.placed = False
         self.timer = 0
+        self.image = pygame.transform.scale(pygame.image.load("img/bomb.png").convert_alpha(), HERO_XY)
 
 
 class VerticalExplosion(pygame.sprite.Sprite):
