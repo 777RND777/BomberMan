@@ -19,6 +19,7 @@ class MainCharacter(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.transform.scale(pygame.image.load("img/mc.png").convert_alpha(), HERO_XY)
         self.rect = self.image.get_rect(center=(x, y))
+        self.dead = False
 
     def control(self, keys):
         if keys[pygame.K_RIGHT]:
@@ -39,6 +40,10 @@ class MainCharacter(pygame.sprite.Sprite):
                 self.rect.y -= 2
         if keys[pygame.K_SPACE]:
             bomb.place()
+
+    def is_dead(self):
+        if pygame.sprite.spritecollideany(self, boom_group):
+            self.dead = True
 
 
 class Bomb(pygame.sprite.Sprite):

@@ -6,17 +6,17 @@ pygame.init()
 pygame.display.set_caption("BomberMan")
 level_edges = l1.create_edges()
 level_walls = l1.create_walls()
-GAME = True
 
-while GAME:
-    keys = pygame.key.get_pressed()
-    mc.control(keys)
-    if keys[pygame.K_ESCAPE]:
-        GAME = False
 
+while not mc.dead:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            GAME = False
+            break
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_ESCAPE]:
+        break
+    mc.control(keys)
 
     screen.fill(BG_COLOR)
     l1.draw_level(level_edges, level_walls)
@@ -29,6 +29,7 @@ while GAME:
         if bomb.timer == 200:
             bomb.explode()
         if bomb.timer > 200:
+            mc.is_dead()
             screen.blit(vertical_boom.image, vertical_boom.rect)
             screen.blit(horizontal_boom.image, horizontal_boom.rect)
         if bomb.timer == 300:
