@@ -52,7 +52,7 @@ class Bomb(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(pygame.image.load("img/bomb.png").convert_alpha(), HERO_XY)
         self.rect = self.image.get_rect(center=(x, y))
         self.is_placed = False
-        self.timer = 0
+        self.timer = 300
         self.size = 1
 
     def place(self):
@@ -72,6 +72,17 @@ class Bomb(pygame.sprite.Sprite):
                 self.rect.y = i + 10
                 break
 
+    def timer_action(self):
+        self.timer -= 1
+        if self.timer == 200:
+            self.almost_explode()
+        if self.timer == 100:
+            self.explode()
+        if bomb.timer < 100:
+            mc.is_dead()
+        if self.timer == 0:
+            self.hide()
+
     def almost_explode(self):
         self.image = pygame.transform.scale(pygame.image.load("img/red_bomb.png").convert_alpha(), HERO_XY)
 
@@ -83,7 +94,7 @@ class Bomb(pygame.sprite.Sprite):
 
     def hide(self):
         self.is_placed = False
-        self.timer = 0
+        self.timer = 300
         self.image = pygame.transform.scale(pygame.image.load("img/bomb.png").convert_alpha(), HERO_XY)
 
 
