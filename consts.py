@@ -38,10 +38,7 @@ class MainCharacter(pygame.sprite.Sprite):
             if pygame.sprite.spritecollideany(self, edge_group) or pygame.sprite.spritecollideany(self, wall_group):
                 self.rect.y -= 2
         if keys[pygame.K_SPACE]:
-            if not bomb.placed:
-                bomb.placed = True
-                bomb.rect.x = self.rect.x
-                bomb.rect.y = self.rect.y
+            bomb.place()
 
 
 class Bomb(pygame.sprite.Sprite):
@@ -49,9 +46,26 @@ class Bomb(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self, bomb_group)
         self.image = pygame.transform.scale(pygame.image.load("img/bomb.png").convert_alpha(), HERO_XY)
         self.rect = self.image.get_rect(center=(x, y))
-        self.placed = False
+        self.is_placed = False
         self.timer = 0
         self.size = 1
+
+    def place(self):
+        if not self.is_placed:
+            self.is_placed = True
+            self.rect.x = mc.rect.x
+            self.rect.y = mc.rect.y
+            self.fix_place()
+
+    def fix_place(self):
+        for i in range(SIZE, WIDTH - 2 * SIZE, SIZE):
+            if self.rect.x in range(i - int(HERO_SIZE / 2), i + SIZE - int(HERO_SIZE / 2)):
+                self.rect.x = i + 10
+                break
+        for i in range(SIZE, WIDTH - 2 * SIZE, SIZE):
+            if self.rect.y in range(i - int(HERO_SIZE / 2), i + SIZE - int(HERO_SIZE / 2)):
+                self.rect.y = i + 10
+                break
 
     def almost_explode(self):
         self.image = pygame.transform.scale(pygame.image.load("img/red_bomb.png").convert_alpha(), HERO_XY)
@@ -63,7 +77,7 @@ class Bomb(pygame.sprite.Sprite):
         vertical_boom.rect.y = self.rect.y - self.size * SIZE - 10
 
     def hide(self):
-        self.placed = False
+        self.is_placed = False
         self.timer = 0
         self.image = pygame.transform.scale(pygame.image.load("img/bomb.png").convert_alpha(), HERO_XY)
 
