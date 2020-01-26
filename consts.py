@@ -21,23 +21,24 @@ class MainCharacter(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(pygame.image.load("img/mc.png").convert_alpha(), HERO_XY)
         self.rect = self.image.get_rect(center=(x, y))
         self.dead = False
+        self.on_bomb = False
 
     def control(self, keys):
         if keys[pygame.K_RIGHT]:
             self.rect.x += 2
-            if is_collision(self):
+            if is_stop_collision(self):
                 self.rect.x -= 2
         if keys[pygame.K_LEFT]:
             self.rect.x -= 2
-            if is_collision(self):
+            if is_stop_collision(self):
                 self.rect.x += 2
         if keys[pygame.K_UP]:
             self.rect.y -= 2
-            if is_collision(self):
+            if is_stop_collision(self):
                 self.rect.y += 2
         if keys[pygame.K_DOWN]:
             self.rect.y += 2
-            if is_collision(self):
+            if is_stop_collision(self):
                 self.rect.y -= 2
         if keys[pygame.K_SPACE]:
             bomb.place()
@@ -59,6 +60,7 @@ class Bomb(pygame.sprite.Sprite):
     def place(self):
         if not self.is_placed:
             self.is_placed = True
+            mc.on_bomb = True
             self.rect.x = mc.rect.x
             self.rect.y = mc.rect.y
             self.fix_place()
@@ -95,6 +97,9 @@ class Bomb(pygame.sprite.Sprite):
         self.is_placed = False
         self.timer = 300
         self.image = pygame.transform.scale(pygame.image.load("img/bomb.png").convert_alpha(), HERO_XY)
+        hide(bomb)
+        hide(horizontal_boom)
+        hide(vertical_boom)
 
 
 class Explosion(pygame.sprite.Sprite):
@@ -112,6 +117,7 @@ class Enemy(pygame.sprite.Sprite):
         self.dead = False
         self.direction = 1
         self.timer = 0
+        self.on_bomb = False
 
     def is_dead(self):
         if pygame.sprite.spritecollideany(self, boom_group):
@@ -120,22 +126,22 @@ class Enemy(pygame.sprite.Sprite):
     def movement(self):
         if self.direction == 1:
             self.rect.y -= 2
-            if is_collision(self):
+            if is_stop_collision(self):
                 self.rect.y += 2
                 self.change_direction()
         if self.direction == 2:
             self.rect.x += 2
-            if is_collision(self):
+            if is_stop_collision(self):
                 self.rect.x -= 2
                 self.change_direction()
         if self.direction == 3:
             self.rect.y += 2
-            if is_collision(self):
+            if is_stop_collision(self):
                 self.rect.y -= 2
                 self.change_direction()
         if self.direction == 4:
             self.rect.x -= 2
-            if is_collision(self):
+            if is_stop_collision(self):
                 self.rect.x += 2
                 self.change_direction()
 
@@ -163,14 +169,22 @@ class Edge(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=(x, y))
 
 
-def is_collision(sprite):
+def is_stop_collision(sprite):
     if pygame.sprite.spritecollideany(sprite, edge_group):
         return True
     if pygame.sprite.spritecollideany(sprite, wall_group):
         return True
-    # if pygame.sprite.spritecollideany(sprite, bomb_group):
-    #     return True
+    if pygame.sprite.spritecollideany(sprite, bomb_group):
+        if not sprite.on_bomb:
+            return True
+    else:
+        sprite.on_bomb = False
     return False
+
+
+def hide(sprite):
+    sprite.rect.x = 0
+    sprite.rect.y = 0
 
 
 # pygame
@@ -183,5 +197,5 @@ edge_group = pygame.sprite.Group()
 
 mc = MainCharacter(105, 105)
 bomb = Bomb(0, 0)
-vertical_boom = Explosion(0, 0, (HERO_SIZE, (2 * bomb.size + 1) * SIZE))
 horizontal_boom = Explosion(0, 0, ((2 * bomb.size + 1) * SIZE, HERO_SIZE))
+vertical_boom = Explosion(0, 0, (HERO_SIZE, (2 * bomb.size + 1) * SIZE))
