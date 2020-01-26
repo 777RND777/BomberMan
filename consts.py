@@ -98,19 +98,10 @@ class Bomb(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(pygame.image.load("img/bomb.png").convert_alpha(), HERO_XY)
 
 
-class VerticalExplosion(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+class Explosion(pygame.sprite.Sprite):
+    def __init__(self, x, y, size):
         pygame.sprite.Sprite.__init__(self, boom_group)
-        self.image = pygame.transform.scale(pygame.image.load("img/blow.jpg").convert_alpha(),
-                                            (HERO_SIZE, (2 * bomb.size + 1) * SIZE))
-        self.rect = self.image.get_rect(center=(x, y))
-
-
-class HorizontalExplosion(pygame.sprite.Sprite):
-    def __init__(self, x, y):
-        pygame.sprite.Sprite.__init__(self, boom_group)
-        self.image = pygame.transform.scale(pygame.image.load("img/blow.jpg").convert_alpha(),
-                                            ((2 * bomb.size + 1) * SIZE, HERO_SIZE))
+        self.image = pygame.transform.scale(pygame.image.load("img/blow.jpg").convert_alpha(), size)
         self.rect = self.image.get_rect(center=(x, y))
 
 
@@ -137,10 +128,11 @@ class Edge(pygame.sprite.Sprite):
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 bomb_group = pygame.sprite.Group()
 boom_group = pygame.sprite.Group()
+enemy_group = pygame.sprite.Group()
 wall_group = pygame.sprite.Group()
 edge_group = pygame.sprite.Group()
 
 mc = MainCharacter(105, 105)
 bomb = Bomb(0, 0)
-vertical_boom = VerticalExplosion(0, 0)
-horizontal_boom = HorizontalExplosion(0, 0)
+vertical_boom = Explosion(0, 0, (HERO_SIZE, (2 * bomb.size + 1) * SIZE))
+horizontal_boom = Explosion(0, 0, ((2 * bomb.size + 1) * SIZE, HERO_SIZE))
