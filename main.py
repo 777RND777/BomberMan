@@ -18,6 +18,7 @@ while not mc.dead:
     if keys[pygame.K_ESCAPE]:
         break
     mc.control(keys)
+    mc.is_dead()
 
     l1.enemy_movement(level_enemies)
 

@@ -79,8 +79,6 @@ class Bomb(pygame.sprite.Sprite):
             self.almost_explode()
         if self.timer == 100:
             self.explode()
-        if bomb.timer < 100:
-            mc.is_dead()
         if self.timer == 0:
             self.hide()
 
