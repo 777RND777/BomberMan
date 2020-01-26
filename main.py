@@ -6,6 +6,7 @@ pygame.init()
 pygame.display.set_caption("BomberMan")
 level_edges = l1.create_edges()
 level_walls = l1.create_walls()
+level_enemies = l1.create_enemies()
 
 
 while not mc.dead:
@@ -19,7 +20,7 @@ while not mc.dead:
     mc.control(keys)
 
     screen.fill(BG_COLOR)
-    l1.draw_level(level_edges, level_walls)
+    l1.draw_level(level_edges, level_walls, level_enemies)
     if bomb.is_placed:
         screen.blit(bomb.image, bomb.rect)
         bomb.timer_action()

@@ -1,9 +1,10 @@
 from consts import *
 
 
-def draw_level(level_edges, level_walls):
-    draw_edges(level_edges)
-    draw_walls(level_walls)
+def draw_level(edges, walls, enemies):
+    draw_edges(edges)
+    draw_walls(walls)
+    draw_enemies(enemies)
 
 
 def create_edges():
@@ -84,3 +85,18 @@ def draw_walls(level):
         if not wall.destroyed:
             wall_group.add(wall)
             screen.blit(wall.image, (wall.rect.x, wall.rect.y))
+
+
+def create_enemies():
+    return [
+        Enemy(275, 120),
+    ]
+
+
+def draw_enemies(level):
+    enemy_group.empty()
+    for enemy in level:
+        enemy.is_dead()
+        if not enemy.dead:
+            enemy_group.add(enemy)
+            screen.blit(enemy.image, (enemy.rect.x, enemy.rect.y))
