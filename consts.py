@@ -101,14 +101,14 @@ class Bomb(pygame.sprite.Sprite):
 class Explosion(pygame.sprite.Sprite):
     def __init__(self, x, y, size):
         pygame.sprite.Sprite.__init__(self, boom_group)
-        self.image = pygame.transform.scale(pygame.image.load("img/blow.jpg").convert_alpha(), size)
+        self.image = pygame.transform.scale(pygame.image.load("img/blow.png").convert_alpha(), size)
         self.rect = self.image.get_rect(center=(x, y))
 
 
 class Wall(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.transform.scale(pygame.image.load("img/wall.jpg").convert_alpha(), XY)
+        self.image = pygame.transform.scale(pygame.image.load("img/wall.png").convert_alpha(), XY)
         self.rect = self.image.get_rect(center=(x, y))
         self.destroyed = False
 
