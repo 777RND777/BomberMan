@@ -1,3 +1,4 @@
+from random import randint
 import pygame
 
 
@@ -24,25 +25,25 @@ class MainCharacter(pygame.sprite.Sprite):
     def control(self, keys):
         if keys[pygame.K_RIGHT]:
             self.rect.x += 2
-            if pygame.sprite.spritecollideany(self, edge_group) or pygame.sprite.spritecollideany(self, wall_group):
+            if is_collision(self):
                 self.rect.x -= 2
         if keys[pygame.K_LEFT]:
             self.rect.x -= 2
-            if pygame.sprite.spritecollideany(self, edge_group) or pygame.sprite.spritecollideany(self, wall_group):
+            if is_collision(self):
                 self.rect.x += 2
         if keys[pygame.K_UP]:
             self.rect.y -= 2
-            if pygame.sprite.spritecollideany(self, edge_group) or pygame.sprite.spritecollideany(self, wall_group):
+            if is_collision(self):
                 self.rect.y += 2
         if keys[pygame.K_DOWN]:
             self.rect.y += 2
-            if pygame.sprite.spritecollideany(self, edge_group) or pygame.sprite.spritecollideany(self, wall_group):
+            if is_collision(self):
                 self.rect.y -= 2
         if keys[pygame.K_SPACE]:
             bomb.place()
 
     def is_dead(self):
-        if pygame.sprite.spritecollideany(self, boom_group):
+        if pygame.sprite.spritecollideany(self, boom_group) or pygame.sprite.spritecollideany(self, enemy_group):
             self.dead = True
 
 
@@ -108,13 +109,41 @@ class Explosion(pygame.sprite.Sprite):
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self, enemy_group)
-        self.image = pygame.transform.scale(pygame.image.load("img/enemy.png").convert_alpha(), HERO_XY)
+        self.image = pygame.transform.scale(pygame.image.load("img/enemy.png").convert_alpha(), XY)
         self.rect = self.image.get_rect(center=(x, y))
         self.dead = False
+        self.direction = 1
+        self.timer = 0
 
     def is_dead(self):
         if pygame.sprite.spritecollideany(self, boom_group):
             self.dead = True
+
+    def movement(self):
+        if self.direction == 1:
+            self.rect.y -= 2
+            if is_collision(self):
+                self.rect.y += 2
+                self.change_direction()
+        if self.direction == 2:
+            self.rect.x += 2
+            if is_collision(self):
+                self.rect.x -= 2
+                self.change_direction()
+        if self.direction == 3:
+            self.rect.y += 2
+            if is_collision(self):
+                self.rect.y -= 2
+                self.change_direction()
+        if self.direction == 4:
+            self.rect.x -= 2
+            if is_collision(self):
+                self.rect.x += 2
+                self.change_direction()
+
+    def change_direction(self):
+        self.direction = randint(1, 4)
+        self.timer = 0
 
 
 class Wall(pygame.sprite.Sprite):
@@ -134,6 +163,16 @@ class Edge(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self, edge_group)
         self.image = pygame.transform.scale(pygame.image.load("img/edge.png").convert_alpha(), XY)
         self.rect = self.image.get_rect(center=(x, y))
+
+
+def is_collision(sprite):
+    if pygame.sprite.spritecollideany(sprite, edge_group):
+        return True
+    if pygame.sprite.spritecollideany(sprite, wall_group):
+        return True
+    # if pygame.sprite.spritecollideany(sprite, bomb_group):
+    #     return True
+    return False
 
 
 # pygame

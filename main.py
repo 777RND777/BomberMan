@@ -19,6 +19,8 @@ while not mc.dead:
         break
     mc.control(keys)
 
+    l1.enemy_movement(level_enemies)
+
     screen.fill(BG_COLOR)
     l1.draw_level(level_edges, level_walls, level_enemies)
     if bomb.is_placed:
