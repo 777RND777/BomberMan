@@ -105,6 +105,18 @@ class Explosion(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=(x, y))
 
 
+class Enemy(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self, enemy_group)
+        self.image = pygame.transform.scale(pygame.image.load("img/enemy.png").convert_alpha(), HERO_XY)
+        self.rect = self.image.get_rect(center=(x, y))
+        self.dead = False
+
+    def is_dead(self):
+        if pygame.sprite.spritecollideany(self, boom_group):
+            self.dead = True
+
+
 class Wall(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
