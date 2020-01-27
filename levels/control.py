@@ -24,15 +24,8 @@ class Level:
         self.draw_enemies()
 
     def draw_edges(self):
-        for i in range(11):
-            screen.blit(self.edges[i].image, (0, i * SIZE))
-            screen.blit(self.edges[i].image, (WIDTH - SIZE, i * SIZE))
-        for i in range(1, 14):
-            screen.blit(self.edges[i].image, (i * SIZE, 0))
-            screen.blit(self.edges[i].image, (i * SIZE, HEIGHT - SIZE))
-        for i in range(1, 7):
-            for j in range(1, 5):
-                screen.blit(self.edges[i].image, (2 * i * SIZE, 2 * j * SIZE))
+        for edge in self.edges:
+            screen.blit(edge.image, edge.rect)
 
     def draw_walls(self):
         wall_group.empty()
