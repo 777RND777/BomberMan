@@ -14,18 +14,26 @@ class Level:
         self.number += 1
         self.created = True
         if self.number == 1:
-            self.edges = l1.create_edges()
-            self.walls = l1.create_walls()
             self.enemies = l1.create_enemies()
+            self.walls = l1.create_walls()
+            self.edges = l1.create_edges()
 
     def draw_level(self):
-        self.draw_edges()
-        self.draw_walls()
         self.draw_enemies()
+        self.draw_walls()
+        self.draw_edges()
 
-    def draw_edges(self):
-        for edge in self.edges:
-            screen.blit(edge.image, edge.rect)
+    def draw_bomb_buffs(self):
+        for buff in self.bomb_buffs:
+            screen.blit(buff.image, (buff.rect.x, buff.rect.y))
+
+    def draw_enemies(self):
+        enemy_group.empty()
+        for enemy in self.enemies:
+            enemy.is_dead()
+            if not enemy.dead:
+                enemy_group.add(enemy)
+                screen.blit(enemy.image, (enemy.rect.x, enemy.rect.y))
 
     def draw_walls(self):
         wall_group.empty()
@@ -35,13 +43,9 @@ class Level:
                 wall_group.add(wall)
                 screen.blit(wall.image, (wall.rect.x, wall.rect.y))
 
-    def draw_enemies(self):
-        enemy_group.empty()
-        for enemy in self.enemies:
-            enemy.is_dead()
-            if not enemy.dead:
-                enemy_group.add(enemy)
-                screen.blit(enemy.image, (enemy.rect.x, enemy.rect.y))
+    def draw_edges(self):
+        for edge in self.edges:
+            screen.blit(edge.image, edge.rect)
 
     def enemy_movement(self):
         for enemy in self.enemies:
