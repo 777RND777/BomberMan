@@ -90,8 +90,11 @@ def draw_walls(walls):
 
 def create_enemies():
     return [
-        Enemy(315, 385),
-        Enemy(525, 105),
+        Enemy(map_scaling(17), map_scaling(3)),
+        Enemy(map_scaling(13), map_scaling(7)),
+        Enemy(map_scaling(23), map_scaling(7)),
+        Enemy(map_scaling(9), map_scaling(11)),
+        Enemy(map_scaling(19), map_scaling(15)),
     ]
 
 
