@@ -169,6 +169,10 @@ class Edge(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=(x, y))
 
 
+def map_scaling(num):
+    return num * SIZE / 2
+
+
 def is_stop_collision(sprite):
     if pygame.sprite.spritecollideany(sprite, edge_group):
         return True
