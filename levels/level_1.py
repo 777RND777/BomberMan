@@ -1,6 +1,10 @@
 from consts import *
 
 
+def create_bomb_buffs():
+    return [BombBonus(map_scaling(11), map_scaling(19))]
+
+
 def create_enemies():
     return [
         Enemy(map_scaling(17), map_scaling(3)),
