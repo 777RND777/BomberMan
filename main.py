@@ -1,15 +1,16 @@
 from consts import *
-import levels.level_1 as l1
+from levels.control import Level
 
 
 pygame.init()
 pygame.display.set_caption("BomberMan")
-level_edges = l1.create_edges()
-level_walls = l1.create_walls()
-level_enemies = l1.create_enemies()
+level = Level()
 
 
 while not mc.dead:
+    if not level.created:
+        level.created = True
+        level.get_level()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             break
@@ -20,10 +21,10 @@ while not mc.dead:
     mc.control(keys)
     mc.is_dead()
 
-    l1.enemy_movement(level_enemies)
+    level.enemy_movement()
 
     screen.fill(BG_COLOR)
-    l1.draw_level(level_edges, level_walls, level_enemies)
+    level.draw_level()
     if bomb.is_placed:
         screen.blit(bomb.image, bomb.rect)
         bomb.timer_action()

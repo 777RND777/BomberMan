@@ -14,7 +14,7 @@ BG_COLOR = (0, 149, 0)
 DELAY = 5
 
 
-# classes
+# sprites
 class MainCharacter(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)

@@ -1,12 +1,6 @@
 from consts import *
 
 
-def draw_level(edges, walls, enemies):
-    draw_edges(edges)
-    draw_walls(walls)
-    draw_enemies(enemies)
-
-
 def create_edges():
     level = []
     for i in range(11):
@@ -19,18 +13,6 @@ def create_edges():
         for j in range(1, 5):
             level.append(Edge(2 * i * SIZE + SIZE / 2, 2 * j * SIZE + SIZE / 2))
     return level
-
-
-def draw_edges(edges):
-    for i in range(11):
-        screen.blit(edges[i].image, (0, i * SIZE))
-        screen.blit(edges[i].image, (WIDTH - SIZE, i * SIZE))
-    for i in range(1, 14):
-        screen.blit(edges[i].image, (i * SIZE, 0))
-        screen.blit(edges[i].image, (i * SIZE, HEIGHT - SIZE))
-    for i in range(1, 7):
-        for j in range(1, 5):
-            screen.blit(edges[i].image, (2 * i * SIZE, 2 * j * SIZE))
 
 
 def create_walls():
@@ -79,15 +61,6 @@ def create_walls():
     ]
 
 
-def draw_walls(walls):
-    wall_group.empty()
-    for wall in walls:
-        wall.is_destroyed()
-        if not wall.destroyed:
-            wall_group.add(wall)
-            screen.blit(wall.image, (wall.rect.x, wall.rect.y))
-
-
 def create_enemies():
     return [
         Enemy(map_scaling(17), map_scaling(3)),
@@ -96,20 +69,3 @@ def create_enemies():
         Enemy(map_scaling(9), map_scaling(11)),
         Enemy(map_scaling(19), map_scaling(15)),
     ]
-
-
-def draw_enemies(enemies):
-    enemy_group.empty()
-    for enemy in enemies:
-        enemy.is_dead()
-        if not enemy.dead:
-            enemy_group.add(enemy)
-            screen.blit(enemy.image, (enemy.rect.x, enemy.rect.y))
-
-
-def enemy_movement(enemies):
-    for enemy in enemies:
-        enemy.timer += 1
-        enemy.movement()
-        if enemy.timer == SIZE:
-            enemy.change_direction()
