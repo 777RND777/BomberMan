@@ -1,64 +1,57 @@
 from consts import *
 
 
-def create_bomb_buffs():
-    return [BombBonus(map_scaling(11), map_scaling(19))]
+bomb_buffs = [BombBonus(map_scaling(11), map_scaling(19))]
+enemies = [
+    Enemy(map_scaling(17), map_scaling(3)),
+    Enemy(map_scaling(13), map_scaling(7)),
+    Enemy(map_scaling(23), map_scaling(7)),
+    Enemy(map_scaling(9), map_scaling(11)),
+    Enemy(map_scaling(19), map_scaling(15)),
+]
+walls = [
+    Wall(map_scaling(7), map_scaling(3)),
+    Wall(map_scaling(11), map_scaling(3)),
 
+    Wall(map_scaling(19), map_scaling(5)),
+    Wall(map_scaling(23), map_scaling(5)),
+    Wall(map_scaling(27), map_scaling(5)),
 
-def create_enemies():
-    return [
-        Enemy(map_scaling(17), map_scaling(3)),
-        Enemy(map_scaling(13), map_scaling(7)),
-        Enemy(map_scaling(23), map_scaling(7)),
-        Enemy(map_scaling(9), map_scaling(11)),
-        Enemy(map_scaling(19), map_scaling(15)),
-    ]
+    Wall(map_scaling(7), map_scaling(7)),
+    Wall(map_scaling(9), map_scaling(7)),
+    Wall(map_scaling(19), map_scaling(7)),
+    Wall(map_scaling(25), map_scaling(7)),
 
+    Wall(map_scaling(11), map_scaling(9)),
 
-def create_walls():
-    return [
-        Wall(map_scaling(7), map_scaling(3)),
-        Wall(map_scaling(11), map_scaling(3)),
+    Wall(map_scaling(5), map_scaling(11)),
+    Wall(map_scaling(7), map_scaling(11)),
+    Wall(map_scaling(13), map_scaling(11)),
+    Wall(map_scaling(15), map_scaling(11)),
+    Wall(map_scaling(21), map_scaling(11)),
+    Wall(map_scaling(27), map_scaling(11)),
+    Wall(map_scaling(27), map_scaling(11)),
 
-        Wall(map_scaling(19), map_scaling(5)),
-        Wall(map_scaling(23), map_scaling(5)),
-        Wall(map_scaling(27), map_scaling(5)),
+    Wall(map_scaling(7), map_scaling(13)),
+    Wall(map_scaling(15), map_scaling(13)),
+    Wall(map_scaling(23), map_scaling(13)),
 
-        Wall(map_scaling(7), map_scaling(7)),
-        Wall(map_scaling(9), map_scaling(7)),
-        Wall(map_scaling(19), map_scaling(7)),
-        Wall(map_scaling(25), map_scaling(7)),
+    Wall(map_scaling(3), map_scaling(15)),
+    Wall(map_scaling(5), map_scaling(15)),
+    Wall(map_scaling(9), map_scaling(15)),
+    Wall(map_scaling(17), map_scaling(15)),
+    Wall(map_scaling(21), map_scaling(15)),
+    Wall(map_scaling(23), map_scaling(15)),
 
-        Wall(map_scaling(11), map_scaling(9)),
+    Wall(map_scaling(11), map_scaling(17)),
+    Wall(map_scaling(23), map_scaling(17)),
 
-        Wall(map_scaling(5), map_scaling(11)),
-        Wall(map_scaling(7), map_scaling(11)),
-        Wall(map_scaling(13), map_scaling(11)),
-        Wall(map_scaling(15), map_scaling(11)),
-        Wall(map_scaling(21), map_scaling(11)),
-        Wall(map_scaling(27), map_scaling(11)),
-        Wall(map_scaling(27), map_scaling(11)),
-
-        Wall(map_scaling(7), map_scaling(13)),
-        Wall(map_scaling(15), map_scaling(13)),
-        Wall(map_scaling(23), map_scaling(13)),
-
-        Wall(map_scaling(3), map_scaling(15)),
-        Wall(map_scaling(5), map_scaling(15)),
-        Wall(map_scaling(9), map_scaling(15)),
-        Wall(map_scaling(17), map_scaling(15)),
-        Wall(map_scaling(21), map_scaling(15)),
-        Wall(map_scaling(23), map_scaling(15)),
-
-        Wall(map_scaling(11), map_scaling(17)),
-        Wall(map_scaling(23), map_scaling(17)),
-
-        Wall(map_scaling(9), map_scaling(19)),
-        Wall(map_scaling(11), map_scaling(19)),
-        Wall(map_scaling(13), map_scaling(19)),
-        Wall(map_scaling(15), map_scaling(19)),
-        Wall(map_scaling(23), map_scaling(19)),
-    ]
+    Wall(map_scaling(9), map_scaling(19)),
+    Wall(map_scaling(11), map_scaling(19)),
+    Wall(map_scaling(13), map_scaling(19)),
+    Wall(map_scaling(15), map_scaling(19)),
+    Wall(map_scaling(23), map_scaling(19)),
+]
 
 
 def create_edges():

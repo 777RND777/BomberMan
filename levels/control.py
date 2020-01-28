@@ -15,9 +15,9 @@ class Level:
         self.number += 1
         self.created = True
         if self.number == 1:
-            self.bomb_buffs = l1.create_bomb_buffs()
-            self.enemies = l1.create_enemies()
-            self.walls = l1.create_walls()
+            self.bomb_buffs = l1.bomb_buffs
+            self.enemies = l1.enemies
+            self.walls = l1.walls
             self.edges = l1.create_edges()
 
     def draw_level(self):
