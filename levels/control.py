@@ -27,8 +27,11 @@ class Level:
         self.draw_edges()
 
     def draw_bomb_buffs(self):
+        bomb_buff_group.empty()
         for buff in self.bomb_buffs:
-            screen.blit(buff.image, (buff.rect.x, buff.rect.y))
+            if not buff.is_picked:
+                bomb_buff_group.add(buff)
+                screen.blit(buff.image, (buff.rect.x, buff.rect.y))
 
     def draw_enemies(self):
         enemy_group.empty()

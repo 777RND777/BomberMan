@@ -194,6 +194,11 @@ def is_stop_collision(sprite):
     return False
 
 
+def buff_collision():
+    for buff in bomb_buff_group:
+        buff.pick_check()
+
+
 def hide(sprite):
     sprite.rect.x = 0
     sprite.rect.y = 0

@@ -21,6 +21,8 @@ while not mc.dead:
     mc.control(keys)
     mc.is_dead()
 
+    buff_collision()
+
     level.enemy_movement()
 
     screen.fill(BG_COLOR)
