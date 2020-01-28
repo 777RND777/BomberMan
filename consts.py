@@ -17,7 +17,7 @@ DELAY = 5
 # sprites
 class MainCharacter(pygame.sprite.Sprite):
     def __init__(self, x, y):
-        pygame.sprite.Sprite.__init__(self)
+        pygame.sprite.Sprite.__init__(self, mc_group)
         self.image = pygame.transform.scale(pygame.image.load("img/mc.png").convert_alpha(), HERO_XY)
         self.rect = self.image.get_rect(center=(x, y))
         self.dead = False
@@ -108,6 +108,9 @@ class Explosion(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(pygame.image.load("img/blow.png").convert_alpha(), size)
         self.rect = self.image.get_rect(center=(x, y))
 
+    def buff_pick(self, size):
+        self.image = pygame.transform.scale(pygame.image.load("img/blow.png").convert_alpha(), size)
+
 
 class BombBonus(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -115,6 +118,14 @@ class BombBonus(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(pygame.image.load("img/bomb_buff.png").convert_alpha(), XY)
         self.rect = self.image.get_rect(center=(x, y))
         self.is_picked = False
+
+    def pick_check(self):
+        if pygame.sprite.spritecollideany(self, mc_group):
+            self.is_picked = True
+            hide(self)
+            bomb.size += 1
+            horizontal_boom.buff_pick(((2 * bomb.size + 1) * SIZE, HERO_SIZE))
+            vertical_boom.buff_pick((HERO_SIZE, (2 * bomb.size + 1) * SIZE))
 
 
 class Enemy(pygame.sprite.Sprite):
@@ -206,6 +217,7 @@ def hide(sprite):
 
 # pygame
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
+mc_group = pygame.sprite.Group()
 bomb_group = pygame.sprite.Group()
 boom_group = pygame.sprite.Group()
 bomb_buff_group = pygame.sprite.Group()
