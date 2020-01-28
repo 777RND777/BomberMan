@@ -6,22 +6,25 @@ class Level:
     def __init__(self):
         self.number = 0
         self.created = False
-        self.edges = []
-        self.walls = []
-        self.enemies = []
-        self.bomb_buffs = []
+        self.bomb_buffs = None
+        self.door = None
+        self.edges = None
+        self.walls = None
+        self.enemies = None
 
     def get_level(self):
         self.number += 1
         self.created = True
         if self.number == 1:
             self.bomb_buffs = l1.bomb_buffs
+            self.door = l1.door
             self.enemies = l1.enemies
             self.walls = l1.walls
             self.edges = l1.create_edges()
 
     def draw_level(self):
         self.draw_bomb_buffs()
+        screen.blit(self.door.image, (self.door.rect.x, self.door.rect.y))
         self.draw_enemies()
         self.draw_walls()
         self.draw_edges()
