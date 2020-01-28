@@ -110,6 +110,7 @@ class Explosion(pygame.sprite.Sprite):
 
     def buff_pick(self, size):
         self.image = pygame.transform.scale(pygame.image.load("img/blow.png").convert_alpha(), size)
+        self.rect = self.image.get_rect(center=(self.rect.x, self.rect.y))
 
 
 class BombBonus(pygame.sprite.Sprite):
@@ -225,7 +226,7 @@ enemy_group = pygame.sprite.Group()
 wall_group = pygame.sprite.Group()
 edge_group = pygame.sprite.Group()
 
-mc = MainCharacter(105, 105)
+mc = MainCharacter(map_scaling(3), map_scaling(3))
 bomb = Bomb(0, 0)
 horizontal_boom = Explosion(0, 0, ((2 * bomb.size + 1) * SIZE, HERO_SIZE))
 vertical_boom = Explosion(0, 0, (HERO_SIZE, (2 * bomb.size + 1) * SIZE))
