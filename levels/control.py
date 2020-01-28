@@ -21,6 +21,10 @@ class Level:
             self.enemies = l1.enemies
             self.walls = l1.walls
             self.edges = l1.create_edges()
+        if self.number == 3:
+            self.bomb_buffs = []
+            self.enemies = []
+            self.walls = []
 
     def draw_level(self):
         self.draw_bomb_buffs()
@@ -62,3 +66,10 @@ class Level:
             enemy.movement()
             if enemy.timer == SIZE:
                 enemy.change_direction()
+
+    def is_finished(self):
+        if pygame.sprite.spritecollideany(self.door, mc_group):
+            self.number += 1
+            self.created = False
+            mc.rect.x = map_scaling(3) - 20
+            mc.rect.y = map_scaling(3) - 20

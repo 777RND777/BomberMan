@@ -134,7 +134,6 @@ class Door(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.transform.scale(pygame.image.load("img/door.png").convert_alpha(), XY)
         self.rect = self.image.get_rect(center=(x, y))
-        self.opened = False
 
 
 class Enemy(pygame.sprite.Sprite):
