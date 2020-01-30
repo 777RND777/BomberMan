@@ -1,4 +1,5 @@
 from consts import *
+from random import randint
 import levels.level_1 as l1
 
 
@@ -66,6 +67,16 @@ class Level:
             enemy.movement()
             if enemy.timer == SIZE:
                 enemy.change_direction()
+
+    def hide_behind_wall(self, sprite):
+        # TODO remove this check later
+        if len(self.walls) > 0:
+            while True:
+                i = randint(0, len(self.walls) - 1)
+                if not self.walls[i].hide_object:
+                    sprite.rect = self.walls[i].rect
+                    self.walls[i].hide_object = True
+                    break
 
     def is_finished(self):
         if pygame.sprite.spritecollideany(self.door, mc_group):

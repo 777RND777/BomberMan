@@ -183,6 +183,7 @@ class Wall(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(pygame.image.load("img/wall.png").convert_alpha(), XY)
         self.rect = self.image.get_rect(center=(x, y))
         self.destroyed = False
+        self.hide_object = False
 
     def is_destroyed(self):
         if pygame.sprite.spritecollideany(self, boom_group):
