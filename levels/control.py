@@ -86,7 +86,6 @@ class Level:
 
     def is_finished(self):
         if pygame.sprite.spritecollideany(self.door, mc_group):
-            self.number += 1
             self.created = False
             mc.rect.x = map_scaling(3) - 20
             mc.rect.y = map_scaling(3) - 20
