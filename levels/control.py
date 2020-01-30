@@ -13,6 +13,13 @@ class Level:
         self.walls = []
         self.enemies = []
 
+    def create_level(self):
+        self.created = True
+        self.get_level()
+        self.hide_behind_wall(self.door)
+        for buff in self.bomb_buffs:
+            self.hide_behind_wall(buff)
+
     def get_level(self):
         self.number += 1
         self.created = True

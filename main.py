@@ -9,8 +9,7 @@ level = Level()
 
 while not mc.dead:
     if not level.created:
-        level.created = True
-        level.get_level()
+        level.create_level()
     level.is_finished()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
