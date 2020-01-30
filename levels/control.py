@@ -8,7 +8,7 @@ class Level:
         self.number = 0
         self.created = False
         self.bomb_buffs = []
-        self.door = Door(0, 0)
+        self.door = Door()
         self.edges = []
         self.walls = []
         self.enemies = []
@@ -25,7 +25,6 @@ class Level:
         self.created = True
         if self.number == 1:
             self.bomb_buffs = l1.bomb_buffs
-            self.door = l1.door
             self.enemies = l1.enemies
             self.walls = l1.walls
             self.edges = l1.create_edges()

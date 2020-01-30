@@ -1,8 +1,7 @@
 from consts import *
 
 
-bomb_buffs = [BombBonus(map_scaling(11), map_scaling(19))]
-door = Door(map_scaling(7), map_scaling(3))
+bomb_buffs = [BombBonus()]
 enemies = [
     Enemy(map_scaling(17), map_scaling(3)),
     Enemy(map_scaling(13), map_scaling(7)),

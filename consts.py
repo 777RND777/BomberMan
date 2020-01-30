@@ -114,10 +114,10 @@ class Explosion(pygame.sprite.Sprite):
 
 
 class BombBonus(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self):
         pygame.sprite.Sprite.__init__(self, bomb_buff_group)
         self.image = pygame.transform.scale(pygame.image.load("img/bomb_buff.png").convert_alpha(), XY)
-        self.rect = self.image.get_rect(center=(x, y))
+        self.rect = self.image.get_rect(center=(0, 0))
         self.is_picked = False
 
     def pick_check(self):
@@ -130,10 +130,10 @@ class BombBonus(pygame.sprite.Sprite):
 
 
 class Door(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.transform.scale(pygame.image.load("img/door.png").convert_alpha(), XY)
-        self.rect = self.image.get_rect(center=(x, y))
+        self.rect = self.image.get_rect(center=(0, 0))
 
 
 class Enemy(pygame.sprite.Sprite):
