@@ -6,11 +6,11 @@ class Level:
     def __init__(self):
         self.number = 0
         self.created = False
-        self.bomb_buffs = None
-        self.door = None
-        self.edges = None
-        self.walls = None
-        self.enemies = None
+        self.bomb_buffs = []
+        self.door = Door(0, 0)
+        self.edges = []
+        self.walls = []
+        self.enemies = []
 
     def get_level(self):
         self.number += 1
