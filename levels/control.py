@@ -1,6 +1,7 @@
 from consts import *
 from random import randint
 import levels.level_1 as l1
+import levels.level_2 as l2
 
 
 class Level:
@@ -28,10 +29,10 @@ class Level:
             self.enemies = l1.enemies
             self.walls = l1.walls
             self.edges = l1.create_edges()
-        if self.number == 3:
-            self.bomb_buffs = []
-            self.enemies = []
-            self.walls = []
+        if self.number == 2:
+            self.bomb_buffs = l2.bomb_bonus
+            self.enemies = l2.enemies
+            self.walls = l2.walls
 
     def draw_level(self):
         self.draw_bomb_buffs()
